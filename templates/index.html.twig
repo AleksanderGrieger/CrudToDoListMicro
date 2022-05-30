@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crud{% endblock %}
+
+{% block body %}
+<div id="container">
+    <h1>TO-DO LIST <i class="fa fa-plus" aria-hidden="true"></i></h1>
+
+    <form method="POST" action="{{path('create_task')}}">
+        <input name="title" type="text" placeholder="Add New Todo" min="2">
+        <input type="submit" value="Add Todo"/>
+    </form>
+    
+    <ul>
+        {% for task in tasks %}
+            <li {% if task.status %} class="completed" {% endif %}>
+                <a href="{{path('delete_task',{'id': task.id})}}">
+                    <span>
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </span>
+                </a>
+                <a href="{{path('switch_status',{'id': task.id})}}">
+                    {{task.title}}
+                </a>
+            </li>
+        {% endfor %}
+        {# <li><a href="{{path('switch_status',{'id':1})}}">lol</a></li> #}
+        {# <li><span><i class="fa fa-trash" aria-hidden="true"></i></span> Go to ads</li>
+        <li><span><i class="fa fa-trash" aria-hidden="true"></i></span> Go to xcv</li>
+        <li><span><i class="fa fa-trash" aria-hidden="true"></i></span> Go to bcvb</li> #}
+    </ul>
+</div>
+{% endblock %}
+
+{# 
+1. nelmio (jms)
+2. nowy kontroler: create task, remove, update, all tasks(display) * wyszukiwanie po paramie
+3. autoryzacja
+4. docker
+
+ #}
