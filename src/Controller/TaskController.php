@@ -19,8 +19,8 @@ use AutoMapperPlus\AutoMapperInterface;
 class TaskController extends AbstractController
 {
     public function __construct(
-        private AutoMapperInterface $autoMapper,
-        private TaskServiceInterface $taskService
+        private readonly AutoMapperInterface $autoMapper,
+        private readonly TaskServiceInterface $taskService
         )
     {
     }
@@ -47,8 +47,8 @@ class TaskController extends AbstractController
         response: Response::HTTP_OK,
         description: 'Returns Task by ID',
         content: new OA\JsonContent(
-            type: 'object', 
-            ref: new Model(type: TaskResponse::class)
+            ref: new Model(type: TaskResponse::class),
+            type: 'object'
         )
     )]
     public function getTask($id): View
